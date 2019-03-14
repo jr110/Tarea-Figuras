@@ -27,16 +27,32 @@ namespace Figura2
             this.B=B;
             this.I=I;
             this.colores=Color.name.azul;
+            
         
             
         }
+        
+        public Color(Color.name col)
+    {
+        colores=col;
+        if(col==Color.name.rojo)
+        {
+            R=128;G=0;B=0;I=1;
+        }
+       else
+        {
+            R=0;G=0;B=255;I=1;
+        }
+
+    }
+    
         
     }
     abstract class Figura
     {
     protected Vector2d position;
-       protected Color fill,border;
-        //public Color fill ,border;
+       protected Color fill;
+        
 
           //Constructor por defecto 
           public Figura(Vector2d position,Color fill){
@@ -47,14 +63,18 @@ namespace Figura2
         {
         
         }
+        
         //constructor de figura
-        public Figura(Vector2d pos,Color fill)
+        public Figura(Vector2d pos)
         {
             this.position= pos;
+            
+        }
+        
+        public Figura(Color fill)
+        {
+           
             this.fill=fill;
-            //this.fill=fill
-            //Color.fill=Color.name.azul;
-            //border= "black";
         }
 
         public abstract void Dibuja();
@@ -112,13 +132,14 @@ namespace Figura2
          Console.WriteLine("Se dibuja un Rectangulo en {0} de color {1}", position, fill);
      }
     }
-    class Program
+    
+        class Program
     {
         static void Main(string[] args)
         {
 
             List<Figura> figuras = new List<Figura>();
-            figuras.Add(new Circulo(new Vector2d(342,500),new Color(Color.name.azul)));
+            figuras.Add(new Circulo(new Vector2d(311,345),new Color(Color.name.azul),10));
             figuras.Add(new Rectangulo(new Vector2d(200,200),new Color(Color.name.rojo)));
             figuras.Add(new Triangulo(new Vector2d(350,233),new Color(Color.name.verde)));
             foreach(Figura f in figuras)
